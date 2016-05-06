@@ -73,20 +73,16 @@ def main():
     Q = int(raw_input())
     for num_case in range(1, Q + 1):
         initial, changes = map(int, raw_input().split())
-      #for aa in range(500):
-        #changes += 1
         reachable = get_reachable(initial, graph)
         submatrix = get_submatrix(matrix, reachable)
         markov = numpy.matrix(submatrix, dtype = 'object')
-        #print reachable
-        #print markov
         if changes < 200000:  # Small enough to compute the whole matrix
             numerator, denominator, index = get_probability(markov,
                                                             changes,
                                                             reachable.index(initial))
         else:
             cycleLength = 60
-            exponent = changes % cycleLength + cycleLength * 7
+            exponent = changes % cycleLength + cycleLength
             numerator, denominator, index = get_probability(markov,
                                                             exponent,
                                                             reachable.index(initial))
