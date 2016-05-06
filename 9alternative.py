@@ -27,11 +27,12 @@ def phi(n):
 
 def order(g, n):
     """Smallest k>=0 such that g^k===1(%n)"""
-    factorization = Counter(primefac.primefac(phi(n)))
+    phi_n = phi(n)
+    factorization = Counter(primefac.primefac(phi_n))
     ans = 1
     for p, e in factorization.iteritems():
         ans *= pow(p, e-max([k for k in range(e + 1)
-                            if fast_exponentiation(g, phi(n)/p**k, n) == 1]))
+                            if fast_exponentiation(g, phi_n/p**k, n) == 1]))
     return ans
 
 def next_ones(N):
